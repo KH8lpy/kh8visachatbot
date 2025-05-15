@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8" />
     <title>Chatbot Widget</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       html, body {
         height: 100%;
         margin: 0;
+        padding: 0;
+        background-color: transparent;
+        overflow: hidden;
       }
     </style>
   </head>
@@ -13,11 +18,9 @@
     <script>
       (function(){
         if (!window.chatbase || window.chatbase("getState") !== "initialized") {
-          window.chatbase = (...arguments) => {
-            if (!window.chatbase.q) {
-              window.chatbase.q = [];
-            }
-            window.chatbase.q.push(arguments);
+          window.chatbase = (...args) => {
+            if (!window.chatbase.q) window.chatbase.q = [];
+            window.chatbase.q.push(args);
           };
           window.chatbase = new Proxy(window.chatbase, {
             get(target, prop) {
